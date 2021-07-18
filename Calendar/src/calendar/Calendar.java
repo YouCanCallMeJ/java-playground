@@ -1,6 +1,5 @@
 package calendar;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Calendar {
@@ -23,6 +22,36 @@ public class Calendar {
 				ints[i] = Integer.parseInt(numbersStrings[i]);
 			}
 
+			// Input Day of the week
+			System.out.println("첫번째 요일을 입력하세요. (SU, MO, WE, TH, FR, SA)");
+			String dayString = scanner.nextLine();
+			int offset = 0;
+			switch (dayString) {
+				case "SU":
+					offset = 0;
+					break;
+				case "MO":
+					offset = 1;
+					break;
+				case "Tu":
+					offset = 2;
+					break;
+				case "WE":
+					offset = 3;
+					break;
+				case "TH":
+					offset = 4;
+					break;
+				case "FR":
+					offset = 5;
+					break;
+				case "SA":
+					offset = 6;
+					break;
+				default:
+					break;
+			}
+			
 			// Print Calendar Head
 			DIM dim = new DIM(ints[0], ints[1]);
 			System.out.println(ints[1] + "년 " + ints[0] + "월은 " + dim.getD() + "입니다.");
@@ -30,17 +59,24 @@ public class Calendar {
 			System.out.println("--------------------------------------------------");
 			
 			// Assign days to array 
-			int[] days = new int[dim.getD()];
+			int[] days = new int[dim.getD() + offset];
 			for (int i = 0; i < days.length; i++) {
-				days[i] = (i + 1);
+				if(i < offset) {
+					days[i] = 0;
+				} else {
+					days[i] = (i + 1 - offset);
+				}
 			}
 
 			for (int i = 0; i < days.length; i++) {
 				if (i != 0 && i % 7 == 0) {
 					System.out.println();
 				}
-				System.out.print(days[i] + "\t");
-				
+				if(days[i] == 0) {
+					System.out.print(" \t");
+				} else {
+					System.out.print(days[i] + "\t");
+				}			
 			}
 			
 			System.out.println();
