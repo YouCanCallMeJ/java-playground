@@ -1,6 +1,5 @@
 package gugudan;
 
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class GuGuDan {
@@ -10,6 +9,7 @@ public class GuGuDan {
 		
 		boolean iterate = true;
 		
+		// version 1: 계산해서 출력
 		while (iterate) {
 			System.out.print("출력을 원하는 단을 입력해주세요:");
 			Scanner scanner = new Scanner(System.in);
@@ -20,10 +20,7 @@ public class GuGuDan {
 			}
 			
 			System.out.println("======================");
-		}
-		
-		
-		// 구구단 출력
+		}		
 	}
 
 }
