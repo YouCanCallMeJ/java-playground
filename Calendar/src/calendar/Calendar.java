@@ -13,6 +13,7 @@ public class Calendar {
 			String[] numbersStrings = scanner.nextLine().split(" ");
 
 			if (Integer.parseInt(numbersStrings[0]) == -1) {
+				System.out.println("종료");
 				break;
 			}
 			
