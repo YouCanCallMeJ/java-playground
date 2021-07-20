@@ -11,16 +11,18 @@ import calendar.Calendar;
 public class SchedulerMain {
 
 	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		
 		System.out.println("+----------------------+\r\n"
 				+ "| 1. 일정 등록\r\n"
 				+ "| 2. 일정 검색\r\n"
 				+ "| 3. 달력 보기\r\n"
 				+ "| h. 도움말 q. 종료\r\n"
 				+ "+----------------------+");
-		while (true) {
+		
+		while (true) {			
+			// 명렁어 입력
 			System.out.println("명령 (1, 2, 3, h, q)");
-			
-			Scanner scanner = new Scanner(System.in);
 			String command = scanner.nextLine();
 			
 			switch (command) {
@@ -35,8 +37,15 @@ public class SchedulerMain {
 					System.out.println("첫번째 요일을 입력하세요. (SU, MO, WE, TH, FR, SA)");
 					String startDayString = scanner.nextLine();
 
-					Calendar calendar = new Calendar();
-					calendar.saveSchedule(yearString, monthString, dayString, startDayString);
+					Calendar calendar = new Calendar(yearString, monthString, dayString, startDayString);
+					
+					// 
+					System.out.println("일정을 입력하세요.");
+					calendar.saveSchedule(scanner.nextLine());
+					System.out.println("일정이 등록되었습니다.");
+					calendar.printCalender();
+				}
+				case "3": {
 					
 				}
 				default:
