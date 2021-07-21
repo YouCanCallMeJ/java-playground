@@ -82,6 +82,10 @@ public class Calendar {
 		days[1][Integer.parseInt(dayString) - 1 + offset] = toDoString;
 	}
 	
+	public String showSchedule(String dayString) {
+		return days[1][Integer.parseInt(dayString) - 1 + offset];
+	}
+	
 	// Calculate Offset
 	public int calculateOffset(String startDayString) {
 		// Input Day of the week
@@ -110,7 +114,6 @@ public class Calendar {
 		System.out.println(this.yearString + "년 " + this.monthString + "월");
 		System.out.println("일\t월\t화\t수\t목\t금\t토");
 		System.out.println("--------------------------------------------------");
-		
 		
 		int endOfWeek = 0;
 		for (int i = 0; i < days[0].length; i++) {			

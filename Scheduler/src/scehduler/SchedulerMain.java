@@ -18,12 +18,15 @@ public class SchedulerMain {
 		
 		Calendar calendar = null;
 		
-		while (true) {			
+		Boolean iterater = true;
+		
+		while (iterater) {			
 			// 명렁어 입력
 			System.out.println("명령 (1, 2, 3, h, q)");
 			String command = scanner.nextLine();
 			
 			switch (command) {
+				// Registration a schedule
 				case "1": {
 					System.out.println("[일정 등록] 날짜를 입력하세요(e.g.2021-07-19).");
 					String dateString = scanner.nextLine();
@@ -46,14 +49,48 @@ public class SchedulerMain {
 					calendar.printCalender();
 					break;
 				}
+				
+				// Search Schedule on a specific day
+				case "2": {
+					Boolean isEmpty = true;
+					String[][] days = calendar.getDays();					
+					for(int i = 0; i < days[1].length; i++) {
+						if (days[1][i] != null) {
+							isEmpty = false;
+						}
+					}
+					
+					if(isEmpty) {
+						System.out.println("일정이 비었습니다..");
+						break;
+					}
+					
+					System.out.println("[일정 검색] 날짜를 입력하세요(e.g.2021-07-19).");
+					String dateString = scanner.nextLine();
+					String dayString = dateString.substring(8, 10);
+
+					System.out.println(dateString + " 일정\n" + calendar.showSchedule(dayString));
+					break;
+				}
+				
+				// Print Calendar
 				case "3": {
 					calendar.printCalender();
+					break;
+				}
+				case "h": {
+					
+					break;
+				}
+				case "q": {
+					iterater = false;
 					break;
 				}
 				default:
 					break;
 			}
-		}		
+		}
+		System.out.print("End of Program");
 	}
 
 }
