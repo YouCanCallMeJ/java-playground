@@ -1,9 +1,5 @@
 package scehduler;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
 import calendar.Calendar;
@@ -20,6 +16,8 @@ public class SchedulerMain {
 				+ "| h. 도움말 q. 종료\r\n"
 				+ "+----------------------+");
 		
+		Calendar calendar = null;
+		
 		while (true) {			
 			// 명렁어 입력
 			System.out.println("명령 (1, 2, 3, h, q)");
@@ -32,21 +30,25 @@ public class SchedulerMain {
 					String yearString = dateString.substring(0, 4);
 					String monthString = dateString.substring(5, 7);
 					String dayString = dateString.substring(8, 10);
+					
+					if(calendar == null) {
+						// Input start day					
+						System.out.println("첫번째 요일을 입력하세요. (SU, MO, WE, TH, FR, SA)");
+						String startDayString = scanner.nextLine();
 
-					// Input start day					
-					System.out.println("첫번째 요일을 입력하세요. (SU, MO, WE, TH, FR, SA)");
-					String startDayString = scanner.nextLine();
-
-					Calendar calendar = new Calendar(yearString, monthString, dayString, startDayString);
+						calendar = new Calendar(yearString, monthString, dayString, startDayString);
+					}
 					
 					// 
 					System.out.println("일정을 입력하세요.");
-					calendar.saveSchedule(scanner.nextLine());
+					calendar.saveSchedule(dayString, scanner.nextLine());
 					System.out.println("일정이 등록되었습니다.");
 					calendar.printCalender();
+					break;
 				}
 				case "3": {
-					
+					calendar.printCalender();
+					break;
 				}
 				default:
 					break;

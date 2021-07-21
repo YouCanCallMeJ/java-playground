@@ -4,7 +4,6 @@ public class Calendar {
 	
 	private String yearString;
 	private String monthString;
-	private String dayString;
 	private String startDayString;
 	private DIM dim;
 	private String[][] days;
@@ -45,14 +44,6 @@ public class Calendar {
 	public String getStartDayString() {
 		return startDayString;
 	}
-
-	public String getDayString() {
-		return dayString;
-	}
-
-	public void setDayString(String dayString) {
-		this.dayString = dayString;
-	}
 	
 	public void setStartDayString(String startDayString) {
 		this.startDayString = startDayString;
@@ -69,7 +60,6 @@ public class Calendar {
 	public Calendar(String yearString, String monthString, String dayString, String startDayString) {
 		this.yearString = yearString;
 		this.monthString = monthString;
-		this.dayString = dayString;
 		this.startDayString = startDayString;
 		this.offset = calculateOffset(startDayString);
 
@@ -88,9 +78,8 @@ public class Calendar {
 	}
 	
 	
-	public void saveSchedule(String toDoString) {
-		int day = Integer.parseInt(dayString);
-		days[1][day - 1 + offset] = toDoString;
+	public void saveSchedule(String dayString, String toDoString) {
+		days[1][Integer.parseInt(dayString) - 1 + offset] = toDoString;
 	}
 	
 	// Calculate Offset
@@ -122,33 +111,29 @@ public class Calendar {
 		System.out.println("일\t월\t화\t수\t목\t금\t토");
 		System.out.println("--------------------------------------------------");
 		
-		for (int i = 0; i < days[0].length; i++) {
-			if (i != 0 && i % 7 == 0) {
-				System.out.println();
-				for (int j = i - 7; j <= i; j++) {
-					if (days[1][j] != null) {
-						System.out.print(".\t");
-					} else {
-						System.out.print(" \t");
-					}
-				}
-				System.out.println();
-			}
+		
+		int endOfWeek = 0;
+		for (int i = 0; i < days[0].length; i++) {			
+			// print days
 			if(days[0][i] == "0") {
 				System.out.print(" \t");
 			} else {
 				System.out.print(days[0][i] + "\t");
 			}
 			
-			if (i == days[0].length - 1) {
+			// print \n every week
+			if (i != 0 && (i + 1) % 7 == 0 || i == days[0].length - 1) {				
 				System.out.println();
-				for (int j = i - 7; j <= i; j++) {
+				for (int j = endOfWeek; j <= i; j++) {
 					if (days[1][j] != null) {
-						System.out.print(".\t");
+						System.out.print(days[1][j] + "\t");
 					} else {
 						System.out.print(" \t");
 					}
 				}
+				
+				endOfWeek = i + 1;
+				
 				System.out.println();
 			}
 		}
