@@ -1,11 +1,15 @@
 package scehduler;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 import calendar.Calendar;
 
 public class SchedulerMain {
-
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		
@@ -17,6 +21,24 @@ public class SchedulerMain {
 				+ "+----------------------+");
 		
 		Calendar calendar = null;
+		
+		File file = new File("Schedule.txt");
+		if (file.exists()) {
+			try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("Schedule.txt"))){
+				calendar = (Calendar) in.readObject();
+				System.out.println("저장된 파일이 로드되었습니다.");	
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		else {
+			System.out.println("새로운 파일이 생성되었습니다..");
+		}
+		
+		
+
+		
+		
 		
 		Boolean iterater = true;
 		
@@ -45,7 +67,12 @@ public class SchedulerMain {
 					// 
 					System.out.println("일정을 입력하세요.");
 					calendar.saveSchedule(dayString, scanner.nextLine());
-					System.out.println("일정이 등록되었습니다.");
+					try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Schedule.txt"))){
+						out.writeObject(calendar);
+						System.out.println("일정이 저장되었습니다.");
+					} catch (Exception e) {
+						System.out.println(e);
+					}
 					calendar.printCalender();
 					break;
 				}

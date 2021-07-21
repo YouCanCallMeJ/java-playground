@@ -1,7 +1,13 @@
 package calendar;
 
-public class Calendar {
+import java.io.Serializable;
+
+public class Calendar implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String yearString;
 	private String monthString;
 	private String startDayString;

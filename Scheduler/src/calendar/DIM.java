@@ -1,6 +1,12 @@
 package calendar;
 
-public class DIM {
+import java.io.Serializable;
+
+public class DIM implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int d;
 	
 	public int getD() {
