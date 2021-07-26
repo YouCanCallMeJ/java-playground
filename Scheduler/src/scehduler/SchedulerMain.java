@@ -33,12 +33,7 @@ public class SchedulerMain {
 		}
 		else {
 			System.out.println("새로운 파일이 생성되었습니다..");
-		}
-		
-		
-
-		
-		
+		}		
 		
 		Boolean iterater = true;
 		
